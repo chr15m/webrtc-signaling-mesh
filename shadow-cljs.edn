@@ -1,0 +1,10 @@
+{:source-paths ["src"]
+ :dependencies []
+ :builds {:app {:target :node-script
+                :output-to "server.js"
+                :main mesh.main/main!
+                :devtools {:after-load mesh.main/reload!}}
+          :artifact {:target :node-script
+                     :output-to "build.js"
+                     :main mesh.main/main!}}}
+

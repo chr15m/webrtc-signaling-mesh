@@ -1,0 +1,6 @@
+.*.swp
+.shadow-cljs
+/*.js
+node_modules
+webrtc-signaling-mesh
+workspace
