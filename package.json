@@ -3,9 +3,10 @@
     "bittorrent-dht": "^9.0.3",
     "bittorrent-protocol": "^3.1.1",
     "browserify": "^16.5.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
-    "shadow-cljs": "^2.8.69",
+    "shadow-cljs": "^2.11.12",
     "uglify-es": "^3.3.9"
   }
 }

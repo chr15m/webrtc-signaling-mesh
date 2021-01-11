@@ -1,30 +1,24 @@
 (ns mesh.main
-  (:require ["bittorrent-dht" :as DHT]
-            ;["bittorrent-protocol" :as BT]
-            ;["express" :as Express]
-            ;["express-ws" :as WS]
-            
-            ))
+  (:require
+    [mesh.web :as web]
+    ;[mesh.bittorrent :as bt]
+    ;[mesh.util :as util]
+    [cljs.core.async :refer (go <!) :as async]
+    [cljs.core.async.interop :refer-macros [<p!]]))
 
-(defn create-servers []
-  (let [; express
-        ; express-websocket
-        ; dht
-        ; bittorrent
-        ]))
+(defonce app (web/create))
 
-(defn main! []
-  (js/console.log "Starting.")
-  (let [dht (DHT.)]
-    ; TODO: persist DHT to disk
-    (.on dht "peer"
-         (fn [peer infoHash from]
-           (js/console.log "peer:" peer infoHash from)))
-    (.announce dht "428803921137c6cce177ea3acadad873b5b4f8f5" (fn [] (print "Announced.")))
-    (.listen dht)
-    ;(js/console.log (.address dht))
-    
-    ))
+(defn setup-routes [app]
+  (.use app "/" (fn [req res] (.json res true))))
 
 (defn reload! []
-  (js/console.log "Reload."))
+  (web/reset-routes app)
+  (setup-routes app)
+  (println "Fresh routes loaded: " (aget app "_router" "stack" "length")))
+
+(defn main! []
+  (web/serve app)
+  ;(bt/serve app)
+  ;(stun/serve app)
+  (reload!)
+  (println "Servers started."))
